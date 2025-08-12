@@ -19,7 +19,7 @@ interface Props {
   onCalcularEscala: (escala: number, blob: Blob) => void;
 }
 
-const MedidaModal: React.FC<Props> = ({
+const ScaleModal: React.FC<Props> = ({
   open,
   onClose,
   imageUrl,
@@ -28,16 +28,14 @@ const MedidaModal: React.FC<Props> = ({
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [points, setPoints] = useState<number[]>([]);
   const [realDistance, setRealDistance] = useState<string>("");
-
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   const [scaleFactor, setScaleFactor] = useState(1);
   const [scale, setScale] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const stageRef = useRef<any>(null);
-
   const stageMax = { width: 800, height: 600 };
 
-  useEffect(() => {
+useEffect(() => {
     if (!imageUrl || !open) return;
 
     resetPuntos();
@@ -69,7 +67,7 @@ const MedidaModal: React.FC<Props> = ({
     onClose();
   };
 
-  const handleClick = (e: any) => {
+  const handleClick = () => {
     const stage = stageRef.current;
     if (!stage) return;
     const pointer = stage.getPointerPosition();
@@ -234,7 +232,7 @@ const MedidaModal: React.FC<Props> = ({
                       key={i}
                       x={points[i * 2]}
                       y={points[i * 2 + 1]}
-                      radius={2}
+                      radius={4}
                       fill="blue"
                       draggable
                       onDragMove={(e) => {
@@ -285,4 +283,4 @@ const MedidaModal: React.FC<Props> = ({
   );
 };
 
-export default MedidaModal;
+export default ScaleModal;

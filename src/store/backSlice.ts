@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import type { ProcesarImagenPayload } from "../models/types";
 
-
 export const procesarImagenThunk = createAsyncThunk(
   "image/procesarImagen",
   async ({ image, action, escalaPx }: ProcesarImagenPayload, thunkAPI) => {
@@ -15,7 +14,7 @@ export const procesarImagenThunk = createAsyncThunk(
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/procesar-imagen/",
+        "https://ace14be49d34.ngrok-free.app/api/procesar-imagen/",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data","X-Requested-With": "XMLHttpRequest", },
