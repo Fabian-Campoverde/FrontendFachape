@@ -15,7 +15,6 @@ import ScaleModal from "../Modal/ScaleModal";
 import MeasurementModal from "../Modal/MeasurementModal";
 import { EditorImagen } from "./ProcesamientoUI";
 
-
 const ProcessForm = () => {
   const dispatch = useAppDispatch();
   const {
@@ -52,7 +51,9 @@ const ProcessForm = () => {
   const [completedCrop, setCompletedCrop] = useState<any>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedResultUrl, setSelectedResultUrl] = useState<string | null>(null);
+  const [selectedResultUrl, setSelectedResultUrl] = useState<string | null>(
+    null
+  );
   const [openMedidaModal, setOpenMedidaModal] = useState(false);
   const [openMedidaOriginModal, setOpenMedidaOriginModal] = useState(false);
   const [escalaPx, setEscalaPx] = useState<number | null>(null);
@@ -150,9 +151,9 @@ const ProcessForm = () => {
   };
 
   useEffect(() => {
-    if (!loading["mejorar_s"] && results["mejorar_s"]) {
-      setPreviewUrl(results["mejorar_s"]);
-      fetch(results["mejorar_s"])
+    if (!loading["mejorar_gan"] && results["mejorar_gan"]) {
+      setPreviewUrl(results["mejorar_gan"]);
+      fetch(results["mejorar_gan"])
         .then((res) => res.blob())
         .then((blob) => {
           const improvedFile = new File(
@@ -165,7 +166,7 @@ const ProcessForm = () => {
           setSelectedFile(improvedFile);
         });
     }
-  }, [loading["mejorar_s"], results["mejorar_s"]]);
+  }, [loading["mejorar_gan"], results["mejorar_gan"]]);
   const handleMejorar = async () => {
     if (!selectedFile || !previewUrl) return;
 
@@ -176,7 +177,7 @@ const ProcessForm = () => {
       type: "image/jpeg",
     });
 
-    dispatch(procesarImagenThunk({ image: improvedFile, action: "mejorar_s" }));
+    dispatch(procesarImagenThunk({ image: improvedFile, action: "mejorar_gan" }));
   };
 
   return (
@@ -185,44 +186,43 @@ const ProcessForm = () => {
       <div className="w-full rounded-xl shadow-sm ">
         <ImageUploader handleFileChange={handleFileChange} />
       </div>
-<EditorImagen
-      previewUrl={previewUrl}
-      results={results}
-      loading={loading}
-      error={error}
-      actionOptions={actionOptions}
-      selectedAction={selectedAction}
-      selectedFile={selectedFile}
-      selectedResultUrl={selectedResultUrl}
-      showCrop={showCrop}
-      crop={crop}
-      completedCrop={completedCrop}
-      imgRef={imgRef}
-      modalOpen={modalOpen}
-      modalResultOpen={modalResultOpen}
-      openMedidaModal={openMedidaModal}
-      openMedidaOriginModal={openMedidaOriginModal}
-      toggleCrop={toggleCrop}
-      setCrop={setCrop}
-      setCompletedCrop={setCompletedCrop}
-      setModalOpen={setModalOpen}
-      setModalResultOpen={setModalResultOpen}
-      setOpenMedidaModal={setOpenMedidaModal}
-      setOpenMedidaOriginModal={setOpenMedidaOriginModal}
-      setPreviewUrl={setPreviewUrl}
-      setSelectedFile={setSelectedFile}
-      setSelectedAction={setSelectedAction}
-      setSelectedResultUrl={setSelectedResultUrl}
-      setEscalaPx={setEscalaPx}
-      setBlobEscalado={setBlobEscalado}
-      
-      handleMejorar={handleMejorar}
-      handleSubmit={handleSubmit}
-      handleMedidaSubmit={handleMedidaSubmit}
-      setShowManualCrop={setShowManualCrop}
-    />
+      <EditorImagen
+        previewUrl={previewUrl}
+        results={results}
+        loading={loading}
+        error={error}
+        actionOptions={actionOptions}
+        selectedAction={selectedAction}
+        selectedFile={selectedFile}
+        selectedResultUrl={selectedResultUrl}
+        showCrop={showCrop}
+        crop={crop}
+        completedCrop={completedCrop}
+        imgRef={imgRef}
+        modalOpen={modalOpen}
+        modalResultOpen={modalResultOpen}
+        openMedidaModal={openMedidaModal}
+        openMedidaOriginModal={openMedidaOriginModal}
+        toggleCrop={toggleCrop}
+        setCrop={setCrop}
+        setCompletedCrop={setCompletedCrop}
+        setModalOpen={setModalOpen}
+        setModalResultOpen={setModalResultOpen}
+        setOpenMedidaModal={setOpenMedidaModal}
+        setOpenMedidaOriginModal={setOpenMedidaOriginModal}
+        setPreviewUrl={setPreviewUrl}
+        setSelectedFile={setSelectedFile}
+        setSelectedAction={setSelectedAction}
+        setSelectedResultUrl={setSelectedResultUrl}
+        setEscalaPx={setEscalaPx}
+        setBlobEscalado={setBlobEscalado}
+        handleMejorar={handleMejorar}
+        handleSubmit={handleSubmit}
+        handleMedidaSubmit={handleMedidaSubmit}
+        setShowManualCrop={setShowManualCrop}
+      />
       {/* Resultados */}
-      
+
       {results["medir_yolo_original"] &&
         results["medir_yolo_con_medidas"] &&
         results["medir_yolo_solo_lineas"] && (

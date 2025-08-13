@@ -165,9 +165,9 @@ export const EditorImagen: React.FC<EditorImagenProps> = ({
                   variant="contained"
                   fullWidth
                   onClick={handleMejorar}
-                  disabled={!selectedFile || loading["mejorar_s"]}
+                  disabled={!selectedFile || loading["mejorar_gan"]}
                   sx={{
-                    backgroundColor: loading["mejorar_s"]
+                    backgroundColor: loading["mejorar_gan"]
                       ? "#d32f2f"
                       : "#e53935",
                     color: "#fff",
@@ -188,7 +188,7 @@ export const EditorImagen: React.FC<EditorImagenProps> = ({
                     },
                   }}
                 >
-                  {loading["mejorar_s"] ? "Mejorando..." : "✨ Mejorar"}
+                  {loading["mejorar_gan"] ? "Mejorando..." : "✨ Mejorar"}
                 </Button>
 
                 <Button
@@ -360,6 +360,6 @@ export const EditorImagen: React.FC<EditorImagenProps> = ({
             </Button>
           </div>
         </div>
-      </div>
+    </div>
   );
 };

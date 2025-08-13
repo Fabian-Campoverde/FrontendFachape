@@ -14,7 +14,7 @@ export const procesarImagenThunk = createAsyncThunk(
 
     try {
       const response = await axios.post(
-        "https://ace14be49d34.ngrok-free.app/api/procesar-imagen/",
+        "https://66c9b75f3498.ngrok-free.app/api/procesar-imagen/",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data","X-Requested-With": "XMLHttpRequest", },
